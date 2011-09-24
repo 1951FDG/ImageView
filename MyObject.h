@@ -15,5 +15,8 @@
 }
 
 - (IBAction)showSource:(id)sender;
+- (IBAction)openDonatePage:(id)sender;
+- (IBAction)openFeedbackPage:(id)sender;
+- (IBAction)openHomePage:(id)sender;
 
 @end

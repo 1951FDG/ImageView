@@ -31,4 +31,19 @@
 	[NSApp terminate:self];
 }
 
+- (IBAction)openDonatePage:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=DADW84SEUMTQE&lc=%@&item_name=%@&currency_code=%@&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted", @"US", [[NSProcessInfo processInfo] processName], @"USD"]]];
+}
+
+- (IBAction)openFeedbackPage:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bitbucket.org/1951FDG/imageview/issues/new"]];
+}
+
+- (IBAction)openHomePage:(id)sender
+{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://bitbucket.org/1951FDG/imageview/wiki"]];
+}
+
 @end
