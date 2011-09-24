@@ -18,22 +18,21 @@
 
 - (void)dealloc
 {
-	[_backgroundColor release];
+	[backgroundColor release];
 	[super dealloc];
 }
 
 - (void)setBackgroundColor:(NSColor *)color
 {
-	color = [color copy];
-	[_backgroundColor release];
-	_backgroundColor = color;
+	[backgroundColor release];
+	backgroundColor = [color retain];
 	[self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)rect
 {
 	[[NSGraphicsContext currentContext] setPatternPhase:NSMakePoint((CGFloat)0.0 - rect.origin.x, [self bounds].size.height - rect.origin.y)];
-	[_backgroundColor set];
+	[backgroundColor set];
 	NSRectFill(rect);
 }
 

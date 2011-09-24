@@ -31,7 +31,7 @@
 		return NULL;
 	}
 	
-	NSURL *absoluteURL = [NSURL fileURLWithPath:path];
+	NSURL *absoluteURL = [NSURL fileURLWithPath:path isDirectory:NO];
 	
 	CGImageSourceRef imageSource = CGImageSourceCreateWithURL((CFURLRef)absoluteURL, NULL);
 	
@@ -239,7 +239,7 @@
 	
 	if ([typeName isEqualToString:@"public.tiff"])
 	{
-		NSInteger count = CGImageSourceGetCount(isrc);
+		NSUInteger count = CGImageSourceGetCount(isrc);
 		
 		CGImageDestinationRef idst = CGImageDestinationCreateWithURL((CFURLRef)absoluteURL, (CFStringRef)typeName, count, NULL);
 		
@@ -250,7 +250,7 @@
 			CFDictionarySetValue(dict, kCGImagePropertyTIFFCompression, [NSNumber numberWithFloat:NSTIFFCompressionLZW]);
 			CFDictionarySetValue(properties, kCGImagePropertyTIFFDictionary, dict);
 			
-			NSInteger i;
+			NSUInteger i;
 			for(i=0;i<count;i++)
 			{
 				CGImageDestinationAddImageFromSource(idst, isrc, i, properties);

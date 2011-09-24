@@ -11,7 +11,7 @@
 
 @interface MyClipView : NSView
 {
-	NSColor *_backgroundColor;
+	NSColor *backgroundColor;
 }
 
 - (void)setBackgroundColor:(NSColor *)color;
