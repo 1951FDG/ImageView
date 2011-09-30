@@ -22,8 +22,7 @@
 	}
 	
 	NSBundle *mainBundle = [NSBundle mainBundle];
-	NSDictionary *infoDictionary = [mainBundle infoDictionary];
-	NSString *name = [[infoDictionary objectForKey:@"CFBundleIconFile"] stringByDeletingPathExtension];
+	NSString *name = [[mainBundle objectForInfoDictionaryKey:@"CFBundleIconFile"] stringByDeletingPathExtension];
 	NSString *path = [mainBundle pathForResource:name ofType:@"icns"];
 	
 	if (!path)
