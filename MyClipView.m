@@ -18,22 +18,36 @@
 
 - (void)dealloc
 {
-	[backgroundColor release];
+	//[backgroundColor release];
+	[contents release];
 	[super dealloc];
 }
 
-- (void)setBackgroundColor:(NSColor *)color
+//- (void)setBackgroundColor:(NSColor *)color
+//{
+//	[backgroundColor release];
+//	backgroundColor = [color retain];
+//	[self setNeedsDisplay:YES];
+//}
+
+- (NSImage *)contents
 {
-	[backgroundColor release];
-	backgroundColor = [color retain];
+	return contents;
+}
+
+- (void)setContents:(NSImage *)image
+{
+	[contents release];
+	contents = [image retain];
 	[self setNeedsDisplay:YES];
 }
 
 - (void)drawRect:(NSRect)rect
 {
-	[[NSGraphicsContext currentContext] setPatternPhase:NSMakePoint((CGFloat)0.0 - rect.origin.x, [self bounds].size.height - rect.origin.y)];
-	[backgroundColor set];
-	NSRectFill(rect);
+	//[[NSGraphicsContext currentContext] setPatternPhase:NSMakePoint((CGFloat)0.0 - rect.origin.x, [self bounds].size.height - rect.origin.y)];
+	//[backgroundColor set];
+	//NSRectFill(rect);
+	[contents drawInRect:rect fromRect:rect operation:NSCompositeCopy fraction:(CGFloat)1.0];
 }
 
 - (void)setImage:(NSImage *)newImage
@@ -57,7 +71,8 @@
 		
 		[self setFrameSize:NSMakeSize(imageWidth, imageHeight)];
 		
-		[self setBackgroundColor:[NSColor colorWithPatternImage:newImage]];
+		//[self setBackgroundColor:[NSColor colorWithPatternImage:newImage]];
+		[self setContents:newImage];
 		
 		if (imageWidth >= screenSize.width && imageHeight >= screenSize.height)
 		{
@@ -81,7 +96,8 @@
 	}
 	else
 	{
-		[self setBackgroundColor:[NSColor colorWithPatternImage:newImage]];
+		//[self setBackgroundColor:[NSColor colorWithPatternImage:newImage]];
+		[self setContents:newImage];
 	}
 }
 

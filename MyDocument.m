@@ -65,7 +65,8 @@
 	
 	NSView *theClipView = [[[MyClipView alloc] initWithFrame:NSMakeRect((CGFloat)0.0, (CGFloat)0.0, imageWidth, imageHeight)] autorelease];
 	
-	[(MyClipView*)theClipView setBackgroundColor:[NSColor colorWithPatternImage:newImage]];
+	//[(MyClipView*)theClipView setBackgroundColor:[NSColor colorWithPatternImage:newImage]];
+	[(MyClipView*)theClipView setContents:newImage];
 	
 	[theClipView registerForDraggedTypes:[NSArray arrayWithObjects:NSURLPboardType, nil]];
 	
@@ -145,9 +146,11 @@
 	
 	NSView *theClipView = [[[MyClipView alloc] initWithFrame:NSMakeRect((CGFloat)0.0, (CGFloat)0.0, imageWidth, imageHeight)] autorelease];
 	
-	[(MyClipView*)theClipView setBackgroundColor:[NSColor colorWithPatternImage:newImage]];
-	
+	//[(MyClipView*)theClipView setBackgroundColor:[NSColor colorWithPatternImage:newImage]];
+	[(MyClipView*)theClipView setContents:newImage];
 	[theClipView registerForDraggedTypes:[NSArray arrayWithObjects:NSURLPboardType, nil]];
+	
+	[theWindow setBackgroundColor:[NSColor clearColor]];
 	
 	[[theWindow contentView] addSubview:theClipView];
 	

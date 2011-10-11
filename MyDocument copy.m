@@ -215,6 +215,8 @@
 	
 	[theClipView setWantsLayer:YES];
 	
+	[theWindow setBackgroundColor:[NSColor clearColor]];
+	
 	[[theWindow contentView] addSubview:theClipView];
 	
 	[theWindow makeKeyAndOrderFront:self];
