@@ -17,6 +17,32 @@
 	return YES;
 }
 
+- (void)dealloc
+{
+	CFRelease(contents);
+	[super dealloc];
+}
+
+- (CGImageRef)contents
+{
+	return contents;
+}
+
+- (void)setContents:(CGImageRef)image
+{
+	CGImageRelease(contents);
+	CFRetain(image);
+	contents = image;
+	[self setNeedsDisplay:YES];
+}
+
+- (void)drawRect:(NSRect)rect
+{
+	CGContextRef context = [[NSGraphicsContext currentContext] graphicsPort];
+	CGContextSetBlendMode(context, kCGBlendModeCopy);
+	CGContextDrawImage (context, CGRectMake((CGFloat)0.0, (CGFloat)0.0, [self bounds].size.width, [self bounds].size.height), contents);
+}
+
 - (void)setImage:(CGImageRef)newImage width:(CGFloat)imageWidth height:(CGFloat)imageHeight
 {
 	NSWindow *theWindow = [self window];
@@ -31,7 +57,8 @@
 		
 		[self setFrameSize:NSMakeSize(imageWidth, imageHeight)];
 		
-		[(CALayer*)[[[self layer] sublayers] objectAtIndex:0] setContents:(id)newImage];
+		//[(CALayer*)[[[self layer] sublayers] objectAtIndex:0] setContents:(id)newImage];
+		[self setContents:newImage];
 		
 		if (imageWidth >= screenSize.width && imageHeight >= screenSize.height)
 		{
@@ -55,7 +82,8 @@
 	}
 	else
 	{
-		[(CALayer*)[[[self layer] sublayers] objectAtIndex:0] setContents:(id)newImage];
+		//[(CALayer*)[[[self layer] sublayers] objectAtIndex:0] setContents:(id)newImage];
+		[self setContents:newImage];
 	}
 }
 
@@ -116,8 +144,8 @@
 	 CFRelease(imageProperties);
 	 }
 	 
-	 if ([MyCheck validateImageSize:(GLint)(imageWidth < imageHeight ? imageHeight : imageWidth)])
-	 {
+	 //if ([MyCheck validateImageSize:(GLint)(imageWidth < imageHeight ? imageHeight : imageWidth)])
+	 //{
 	 CGImageRef newImage = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
 	 
 	 if (newImage)
@@ -131,7 +159,7 @@
 	 
 	 CFRelease(newImage);
 	 }
-	 }
+	 //}
 	 
 	 CFRelease(imageSource);
 	 }
@@ -167,8 +195,8 @@
 				CFRelease(imageProperties);
 			}
 			
-			if ([MyCheck validateImageSize:(GLint)(imageWidth < imageHeight ? imageHeight : imageWidth)])
-			{
+			//if ([MyCheck validateImageSize:(GLint)(imageWidth < imageHeight ? imageHeight : imageWidth)])
+			//{
 				CGImageRef newImage = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
 				
 				if (newImage)
@@ -180,7 +208,7 @@
 					
 					CFRelease(newImage);
 				}
-			}
+			//}
 			
 			CFRelease(imageSource);
 		}

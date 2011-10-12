@@ -12,7 +12,10 @@
 
 @interface MyLayerView : NSView
 {
-
+	CGImageRef contents;
 }
+
+- (CGImageRef)contents;
+- (void)setContents:(CGImageRef)image;
 
 @end

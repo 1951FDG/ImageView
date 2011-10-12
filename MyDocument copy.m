@@ -53,17 +53,17 @@
 	CGFloat imageWidth = CGImageGetWidth(newImage);
 	CGFloat imageHeight = CGImageGetHeight(newImage);
 	
-	CALayer *imageLayer = [CALayer layer];
+	//CALayer *imageLayer = [CALayer layer];
 	
-	[imageLayer setContentsGravity:kCAGravityBottomLeft];
-	[imageLayer setContents:(id)newImage];
+	//[imageLayer setContentsGravity:kCAGravityBottomLeft];
+	//[imageLayer setContents:(id)newImage];
 	
-	CFRelease(newImage);
+	//CFRelease(newImage);
 	
-	CAScrollLayer *scrollLayer = [CAScrollLayer layer];
+	//CAScrollLayer *scrollLayer = [CAScrollLayer layer];
 	
-	[scrollLayer setBackgroundColor:CGColorGetConstantColor(kCGColorWhite)];
-	[scrollLayer addSublayer:imageLayer];
+	//[scrollLayer setBackgroundColor:CGColorGetConstantColor(kCGColorWhite)];
+	//[scrollLayer addSublayer:imageLayer];
 	
 	NSRect screenFrame = [[NSScreen mainScreen] frame];
 	
@@ -85,11 +85,14 @@
 	
 	NSView *theClipView = [[[MyLayerView alloc] initWithFrame:NSMakeRect((CGFloat)0.0, (CGFloat)0.0, imageWidth, imageHeight)] autorelease];
 	
+	[(MyLayerView*)theClipView setContents:newImage];
+	CFRelease(newImage);
+	
 	[theClipView registerForDraggedTypes:[NSArray arrayWithObjects:NSURLPboardType, nil]];
 	
-	[theClipView setLayer:scrollLayer];
+	//[theClipView setLayer:scrollLayer];
 	
-	[theClipView setWantsLayer:YES];
+	//[theClipView setWantsLayer:YES];
 	
 	[[theWindow contentView] addSubview:theClipView];
 	
@@ -134,11 +137,11 @@
 		CFRelease(imageProperties);
 	}
 	
-	if (![MyCheck validateImageSize:(GLint)(imageWidth < imageHeight ? imageHeight : imageWidth)])
-	{
-		CFRelease(imageSource);
-		return NULL;
-	}
+//	if (![MyCheck validateImageSize:(GLint)(imageWidth < imageHeight ? imageHeight : imageWidth)])
+//	{
+//		CFRelease(imageSource);
+//		return NULL;
+//	}
 	
 	CGImageRef newImage = CGImageSourceCreateImageAtIndex(imageSource, 0, NULL);
 	
@@ -153,17 +156,17 @@
 	[self setFileType:typeName];
 	[self setFileURL:absoluteURL];
 	
-	CALayer *imageLayer = [CALayer layer];
+	//CALayer *imageLayer = [CALayer layer];
 	
-	[imageLayer setContentsGravity:kCAGravityBottomLeft];
-	[imageLayer setContents:(id)newImage];
+	//[imageLayer setContentsGravity:kCAGravityBottomLeft];
+	//[imageLayer setContents:(id)newImage];
 	
-	CFRelease(newImage);
+	//CFRelease(newImage);
 	
-	CAScrollLayer *scrollLayer = [CAScrollLayer layer];
+	//CAScrollLayer *scrollLayer = [CAScrollLayer layer];
 	
-	[scrollLayer setBackgroundColor:CGColorGetConstantColor(kCGColorWhite)];
-	[scrollLayer addSublayer:imageLayer];
+	//[scrollLayer setBackgroundColor:CGColorGetConstantColor(kCGColorWhite)];
+	//[scrollLayer addSublayer:imageLayer];
 	
 	NSRect screenFrame = [[NSScreen mainScreen] frame];
 	
@@ -209,11 +212,14 @@
 	
 	NSView *theClipView = [[[MyLayerView alloc] initWithFrame:NSMakeRect((CGFloat)0.0, (CGFloat)0.0, imageWidth, imageHeight)] autorelease];
 	
+	[(MyLayerView*)theClipView setContents:newImage];
+	CFRelease(newImage);
+	
 	[theClipView registerForDraggedTypes:[NSArray arrayWithObjects:NSURLPboardType, nil]];
 	
-	[theClipView setLayer:scrollLayer];
+	//[theClipView setLayer:scrollLayer];
 	
-	[theClipView setWantsLayer:YES];
+	//[theClipView setWantsLayer:YES];
 	
 	[theWindow setBackgroundColor:[NSColor clearColor]];
 	
